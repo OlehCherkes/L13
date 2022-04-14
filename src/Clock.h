@@ -3,8 +3,8 @@
 #include <WiFiUdp.h>
 
 // Логин и пароль Wi-Fi
-const char *ssid = "L13";
-const char *password = "0932506116";
+const char *ssid = "Perchik2_2.4Ghz";
+const char *password = "UKR_5016";
 
 // Определяют клиента NTP для запроса даты и времени с сервера NTP
 WiFiUDP ntpUDP;
@@ -85,62 +85,62 @@ DateStruct Clock()
 
 void DrawClock(DateStruct GetDate)
 {
-    if (WiFi.status() == WL_CONNECTED) 
+    if (WiFi.status() == WL_CONNECTED)
     {
-    // Прорисовка часов
-    static int previous_second;
-    if (GetDate.currentSecond != previous_second)
-    {
-        tft.fillRect(30, 10, 90, 25, 0x0000);
-        previous_second = GetDate.currentSecond;
-    }
-    tft.setTextColor(0xFFFF);
-    tft.setCursor(30, 30);
-    tft.print(GetDate.formattedTime);
+        // Прорисовка часов
+        static int previous_second;
+        if (GetDate.currentSecond != previous_second)
+        {
+            tft.fillRect(30, 10, 90, 25, 0x0000);
+            previous_second = GetDate.currentSecond;
+        }
+        tft.setTextColor(0xFFFF);
+        tft.setCursor(30, 30);
+        tft.print(GetDate.formattedTime);
 
-    // Прорисовка дня недели
-    static String previous_weekDay;
-    if (GetDate.weekDay != previous_weekDay)
-    {
-        tft.fillRect(125, 10, 50, 25, 0x0000);
-        previous_weekDay = GetDate.weekDay;
-    }
-    tft.setTextColor(0x0778);
-    tft.print(GetDate.weekDay);
+        // Прорисовка дня недели
+        static String previous_weekDay;
+        if (GetDate.weekDay != previous_weekDay)
+        {
+            tft.fillRect(125, 10, 50, 25, 0x0000);
+            previous_weekDay = GetDate.weekDay;
+        }
+        tft.setTextColor(0x0778);
+        tft.print(GetDate.weekDay);
 
-    // Прорисовка даты (г/м/д)
-    static String previous_currentDate;
-    if (GetDate.currentDate != previous_currentDate)
-    {
-        tft.fillRect(30, 35, 120, 25, 0x0000);
-        previous_currentDate = GetDate.currentDate;
-    }
-    tft.setTextColor(0xFFFF);
-    tft.setCursor(30, 55);
-    tft.print(GetDate.currentDate);
+        // Прорисовка даты (г/м/д)
+        static String previous_currentDate;
+        if (GetDate.currentDate != previous_currentDate)
+        {
+            tft.fillRect(30, 35, 120, 25, 0x0000);
+            previous_currentDate = GetDate.currentDate;
+        }
+        tft.setTextColor(0xFFFF);
+        tft.setCursor(30, 55);
+        tft.print(GetDate.currentDate);
     }
 }
 
 void DrawIP()
 {
-    if (WiFi.status() == WL_CONNECTED) 
+    if (WiFi.status() == WL_CONNECTED)
     {
         // Прорисовка IP
-    tft.drawBitmap(393, 8, WiFi_bitmab, 25, 25, 0xFFFF);
-    tft.setCursor(210, 30);
-    tft.setTextColor(0x0778);
-    tft.print("IP: ");
-    tft.print(WiFi.localIP());
+        tft.drawBitmap(393, 8, WiFi_bitmab, 25, 25, 0xFFFF);
+        tft.setCursor(200, 30);
+        tft.setTextColor(0x0778);
+        tft.print("IP: ");
+        tft.print(WiFi.localIP());
 
-    // Прорисовка имени Wi-Fi (ssid)
-    // tft.drawRoundRect(209, 34, 43, 27, 3, 0xFF20);
-    tft.setCursor(210, 55);
-    tft.print(ssid);
+        // Прорисовка имени Wi-Fi (ssid)
+        // tft.drawRoundRect(209, 34, 43, 27, 3, 0xFF20);
+        tft.setCursor(200, 55);
+        tft.print(ssid);
     }
 
-    if (WiFi.status() != WL_CONNECTED && millis() > 5000)
+    else if (WiFi.status() != WL_CONNECTED && millis() > 8000)
     {
-        tft.setCursor(210, 30);
+        tft.setCursor(200, 30);
         tft.setTextColor(0x0778);
         tft.print("No WiFi connection");
     }

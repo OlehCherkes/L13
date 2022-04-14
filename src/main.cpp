@@ -24,34 +24,37 @@ void loop()
 {
   switch (flag_screen)
   {
+  // Главное меню
   case false:
     if (!flag_clear)
     {
       tft.fillScreen(0x0000);
       flag_clear = true;
     }
-    DrawMain();    // Функция вывода главного меню
-    DrawButton();  // Функция прорисовки кнопок
-    ButtonRead();
-    EncoderRead(); // Фунция считывания положения энкодера
-    DrawEncoder(); // функция отрисовки энкодера
-    Clock();
-    DrawClock(GetDate);
-    DrawIP();
+    DrawMain();         // Функция вывода главного меню
+    ButtonRead();       // Функция считывания состояния кнопок
+    EncoderRead();      // Фунция считывания положения энкодера
+    DrawButton();       // Функция прорисовки кнопок
+    DrawEncoder();      // Функция отрисовки энкодера
+    Clock();            // Функция считывания данных с NTP
+    DrawClock(GetDate); // Функция отрисовки часов
+    DrawIP();           // Функция отрисовки Wi-Fi, IP
     break;
 
+  // Меню настроек
   case true:
     if (flag_clear)
     {
       tft.fillScreen(0x0000);
       flag_clear = false;
     }
-    ButtonBack();
-    DrawSecondScreen();
-    DrawPointer(pointer, flag);
+    ButtonBack();               // Функция отрисовки кнопки "BACK"
+    DrawSecondScreen();         // Отрисовка подменю
+    DrawPointer(pointer, flag); // Отрисовка указателя
     break;
   }
 
+  // Меняем страницу экрана
   if (mcp.digitalRead(BTN_PIN_1) && !flag_screen && millis() - tmr > 1000)
   {
     flag_screen = !flag_screen;

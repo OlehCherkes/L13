@@ -70,12 +70,16 @@ void DrawButton()
 {
     // Прорисовка кнопоки 1
     tft.drawRoundRect(30, 280, 90, 30, 3, 0xFF20);
+    // tft.drawRoundRect(29, 280, 80, 30, 3, 0xFF20);
+    // tft.drawRoundRect(28, 280, 80, 30, 3, 0xFF20);
     tft.setTextColor(0xFFFF);
     tft.setCursor(40, 304);
     tft.print("MENU");
 
     // Прорисовка кнопоки 2
     tft.drawRoundRect(130, 280, 90, 30, 3, 0xFF20);
+    // tft.drawRoundRect(119, 280, 80, 30, 3, 0xFF20);
+    // tft.drawRoundRect(118, 280, 80, 30, 3, 0xFF20);
     tft.setTextColor(0xFFFF);
     switch (button_state1)
     {
@@ -124,6 +128,8 @@ void DrawButton()
 
     // Прорисовка кнопоки 3
     tft.drawRoundRect(230, 280, 90, 30, 3, 0xFF20);
+    // tft.drawRoundRect(209, 280, 80, 30, 3, 0xFF20);
+    // tft.drawRoundRect(208, 280, 80, 30, 3, 0xFF20);
     tft.setTextColor(0xFFFF);
     tft.setCursor(255, 304);
     tft.print(button_value2);
@@ -139,6 +145,8 @@ void DrawButton()
 void ButtonBack()
 {
     tft.drawRoundRect(30, 280, 80, 30, 3, 0xFF20);
+    tft.drawRoundRect(29, 280, 80, 30, 3, 0xFF20);
+    tft.drawRoundRect(28, 280, 80, 30, 3, 0xFF20);
     tft.setTextColor(0xFFFF);
     tft.setCursor(37, 304);
     tft.print("BACK");
