@@ -32,6 +32,7 @@ void loop()
     }
     DrawMain();    // Функция вывода главного меню
     DrawButton();  // Функция прорисовки кнопок
+    ButtonRead();
     EncoderRead(); // Фунция считывания положения энкодера
     DrawEncoder(); // функция отрисовки энкодера
     Clock();
@@ -51,7 +52,7 @@ void loop()
     break;
   }
 
-  if (mcp.digitalRead(BTN_PIN_1) && !flag_screen && millis() - tmr > 500)
+  if (mcp.digitalRead(BTN_PIN_1) && !flag_screen && millis() - tmr > 1000)
   {
     flag_screen = !flag_screen;
     tmr = millis();

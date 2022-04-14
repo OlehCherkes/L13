@@ -1,3 +1,6 @@
+#ifndef BUTTON_H
+#define BUTTON_H
+
 #include "Adafruit_MCP23X17.h"
 
 uint32_t tmr = 0;
@@ -22,6 +25,14 @@ uint32_t tmr = 0;
 
 Adafruit_MCP23X17 mcp; // Создание обьекта MCP23017
 
+int button_value1 = 1; // значение кнопки кноки №1
+int button_state1 = 0; // счетчик кнопки кноки №1
+int previous_button_value1 = 0; // предидущее значение кноки №1
+
+int button_value2 = 1; // значение кнопки кноки №2
+int button_state2 = 0; //счетчик кнопки кноки №2
+int previous_button_value2 = 0; // предидущее значение кноки №2
+
 // Функция настроек кнопок для Setup
 void MCP_setings(){
    mcp.begin_I2C(0x20);
@@ -36,3 +47,50 @@ void ButtonState() {
     }
 }
 
+
+// функция чтения нажатия кновок
+void ButtonRead() {                     
+//проверка нажатия кнопки с выполнением действия  
+    if (mcp.digitalRead(BTN_PIN_9)) {
+      Serial.print("Click1"); 
+      button_state1++;
+      if(button_state1 == 4) button_state1 = 3;
+      delay(250);
+    }
+    if (mcp.digitalRead(BTN_PIN_5)) {
+      button_state1--;
+      if(button_state1 == -4) button_state1 = -3;
+      delay(250);
+    }
+
+// выбор шага      
+    switch(button_state1)
+    {
+      case -1:
+        button_value1 = -10;
+        break;
+      case -2:
+        button_value1 = -100;
+        break;
+      case -3:
+        button_value1 = -1000;
+        break;
+      case 0:
+        button_value1 = 1;
+        break;
+      case 1:
+        button_value1 = 10;
+        break;
+      case 2:
+        button_value1 = 100;
+        break;
+      case 3:
+        button_value1 = 1000;
+        break;
+    }
+
+    if (button_state1 < 0) button_state1 = 0; // ограничитель кноки 1
+
+}
+
+#endif
