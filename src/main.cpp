@@ -51,7 +51,7 @@ void loop()
     break;
   }
 
-  if (mcp.digitalRead(BTN_PIN_1) && !flag_screen && millis() - tmr > 200)
+  if (mcp.digitalRead(BTN_PIN_1) && !flag_screen && millis() - tmr > 500)
   {
     flag_screen = !flag_screen;
     tmr = millis();
