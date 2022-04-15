@@ -3,8 +3,8 @@
 #include <WiFiUdp.h>
 
 // Логин и пароль Wi-Fi
-const char *ssid = "Perchik2_2.4Ghz";
-const char *password = "UKR_5016";
+const char *ssid = "L13";
+const char *password = "0932506116";
 
 // Определяют клиента NTP для запроса даты и времени с сервера NTP
 WiFiUDP ntpUDP;

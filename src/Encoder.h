@@ -62,8 +62,8 @@ void EncoderRead()
   // return value1;  //функция возвращает значение
 }
 
-int previous_value1 = 0;
-int previous_value2 = 0;
+float previous_value1 = 0.0f;
+float previous_value2 = 0.0f;
 
 // Отрисовка значений энкодеров
 void DrawEncoder()
@@ -79,23 +79,28 @@ void DrawEncoder()
   tft.print(value2);
   tft.print(" %");
 
-  if (value1 > previous_value1)
+  int draw_line1 = map(value1, 0 , 1000000, 0 ,420);
+  if (value1 || value1 > previous_value1)
   {
-    tft.fillRect(30 + value1, 128, 1, 18, 0x0FF0);
+    tft.fillRect(30, 128, draw_line1, 18, 0x0FF0);
+
   }
   if (value1 < previous_value1)
   {
-    tft.fillRect(31 + value1, 128, 1, 18, 0x0000);
+    //tft.writeFillRect(448, 128, -(420 - draw_line1), 18, 0xF0F0);
+    tft.fillRect(31, 128, 418, 18, 0x0000);
   }
   previous_value1 = value1;
 
-  if (value2 > previous_value2)
+  int draw_line2 = map(value2, 0 , 100, 0 ,420);
+  if (value2 || value2 > previous_value2)
   {
-    tft.fillRect(30 + value2, 178, 1, 18, 0x0FF0);
+    tft.fillRect(30, 178, draw_line2, 18, 0x0FF0);
   }
   if (value2 < previous_value2)
   {
-    tft.fillRect(31 + value2, 178, 1, 18, 0x0000);
+   //tft.writeFillRect(448, 178, -(420 - draw_line2), 18, 0xF000);
+    tft.fillRect(31, 178, 418, 18, 0x0000);
   }
   previous_value2 = value2;
 }
