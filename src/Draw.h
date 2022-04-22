@@ -46,7 +46,7 @@ void DrawMain()
     // Прорисовка значений кулерра
     tft.setCursor(210, 230);
     tft.setTextColor(0x0778);
-    tft.print("Fun Speed: ");
+    tft.print("MFrequency: ");
     tft.print(data[0]);
     tft.print(" %");
 
